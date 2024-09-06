@@ -8,7 +8,7 @@ void main() {
   group('PizzaGeneratorPage', () {
     group('route', () {
       test('is routable', () {
-        expect(PizzaGeneratorPage.route(), isA<MaterialPageRoute>());
+        expect(PizzaGeneratorPage.route(), isA<MaterialPageRoute<dynamic>>());
       });
     });
 
