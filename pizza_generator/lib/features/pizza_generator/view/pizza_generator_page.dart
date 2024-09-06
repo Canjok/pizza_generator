@@ -11,7 +11,9 @@ class PizzaGeneratorPage extends StatelessWidget {
 
   /// The static route for PizzaGeneratorPage
   static Route<dynamic> route() {
-    return MaterialPageRoute<dynamic>(builder: (_) => const PizzaGeneratorPage());
+    return MaterialPageRoute<dynamic>(
+      builder: (_) => const PizzaGeneratorPage(),
+    );
   }
 
   @override
@@ -22,7 +24,7 @@ class PizzaGeneratorPage extends StatelessWidget {
         body: PizzaGeneratorView(),
       ),
     );
-  }    
+  }
 }
 
 /// {@template pizza_generator_view}
