@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:pizza_generator/features/pizza_generator/bloc/bloc.dart';
 
 void main() {
-  group('PizzaGeneratorEvent', () {  
+  group('PizzaGeneratorEvent', () {
     group('CustomPizzaGeneratorEvent', () {
       test('supports value equality', () {
         expect(
@@ -15,10 +15,7 @@ void main() {
     });
     group('constructor', () {
       test('can be instantiated', () {
-        expect(
-          const CustomPizzaGeneratorEvent(),
-          isNotNull
-        );
+        expect(const CustomPizzaGeneratorEvent(), isNotNull);
       });
     });
   });
