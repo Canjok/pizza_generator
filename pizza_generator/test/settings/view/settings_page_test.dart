@@ -8,7 +8,7 @@ void main() {
   group('SettingsPage', () {
     group('route', () {
       test('is routable', () {
-        expect(SettingsPage.route(), isA<MaterialPageRoute>());
+        expect(SettingsPage.route(), isA<MaterialPageRoute<dynamic>>());
       });
     });
 
