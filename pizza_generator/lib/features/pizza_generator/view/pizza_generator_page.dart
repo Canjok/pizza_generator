@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pizza_generator/features/pizza_generator/bloc/bloc.dart';
 import 'package:pizza_generator/features/pizza_generator/widgets/pizza_generator_body.dart';
+import 'package:pizza_generator/l10n/l10n.dart';
 
 /// {@template pizza_generator_page}
 /// A description for PizzaGeneratorPage
@@ -20,8 +21,11 @@ class PizzaGeneratorPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => PizzaGeneratorBloc(),
-      child: const Scaffold(
-        body: PizzaGeneratorView(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(context.l10n.appTitle),
+        ),
+        body: const PizzaGeneratorView(),
       ),
     );
   }
