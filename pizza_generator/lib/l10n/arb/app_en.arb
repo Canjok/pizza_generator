@@ -3,5 +3,9 @@
     "appTitle": "Pizza Generator",
     "@appTitle": {
         "description": "Title of the whole app"
+    },
+    "settings": "Settings",
+    "@settings": {
+        "description": "Title of the settings page"
     }
 }
