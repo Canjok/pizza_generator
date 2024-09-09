@@ -104,10 +104,11 @@ class __$$IngredientListModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$IngredientListModelImpl implements _IngredientListModel {
+class _$IngredientListModelImpl extends _IngredientListModel {
   const _$IngredientListModelImpl(
       {required final List<IngredientModel> ingredients})
-      : _ingredients = ingredients;
+      : _ingredients = ingredients,
+        super._();
 
   factory _$IngredientListModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$IngredientListModelImplFromJson(json);
@@ -156,10 +157,11 @@ class _$IngredientListModelImpl implements _IngredientListModel {
   }
 }
 
-abstract class _IngredientListModel implements IngredientListModel {
+abstract class _IngredientListModel extends IngredientListModel {
   const factory _IngredientListModel(
           {required final List<IngredientModel> ingredients}) =
       _$IngredientListModelImpl;
+  const _IngredientListModel._() : super._();
 
   factory _IngredientListModel.fromJson(Map<String, dynamic> json) =
       _$IngredientListModelImpl.fromJson;
