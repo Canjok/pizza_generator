@@ -4,6 +4,10 @@
     "@appTitle": {
         "description": "Title of the whole app"
     },
+    "newIngredient": "New ingredient",
+    "@newIngredient": {
+        "description": "Title of a textform to hint that a new ingredient can be added"
+    },
     "settings": "Settings",
     "@settings": {
         "description": "Title of the settings page"

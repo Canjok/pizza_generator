@@ -39,6 +39,11 @@ Future<void> initServiceLocator() async {
     )
     // Usecases
     ..registerLazySingleton(
+      () => AddIngredientUsecase(
+        ingredientsRepository: sl(),
+      ),
+    )
+    ..registerLazySingleton(
       () => LoadIngredientsUsecase(
         commonPreferencesRepository: sl(),
         ingredientsRepository: sl(),
