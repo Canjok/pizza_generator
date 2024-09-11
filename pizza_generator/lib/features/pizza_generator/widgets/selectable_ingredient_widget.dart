@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pizza_generator/features/pizza_generator/pizza_generator.dart';
 
 class SelectableIngredientWidget extends StatefulWidget {
   const SelectableIngredientWidget({
@@ -37,6 +38,12 @@ class _SelectableIngredientWidgetState
           value: isSelected,
           onChanged: (value) => setState(
             () {
+              BlocProvider.of<PizzaGeneratorBloc>(context).add(
+                IngredientsSelectionChanged(
+                  name: widget.name,
+                  isSelected: value,
+                ),
+              );
               isSelected = value;
             },
           ),

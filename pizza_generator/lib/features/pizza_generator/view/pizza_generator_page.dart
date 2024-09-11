@@ -23,8 +23,10 @@ class PizzaGeneratorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => PizzaGeneratorBloc(loadIngredientsUsecase: sl())
-        ..add(const LoadIngredientsEvent()),
+      create: (context) => PizzaGeneratorBloc(
+        loadIngredientsUsecase: sl(),
+        saveIngredientsUsecase: sl(),
+      )..add(const LoadIngredientsEvent()),
       child: Scaffold(
         appBar: AppBar(
           title: Text(context.l10n.appTitle),

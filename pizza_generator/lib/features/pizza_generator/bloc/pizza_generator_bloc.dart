@@ -12,10 +12,13 @@ class PizzaGeneratorBloc
     extends Bloc<PizzaGeneratorEvent, PizzaGeneratorState> {
   PizzaGeneratorBloc({
     required this.loadIngredientsUsecase,
+    required this.saveIngredientsUsecase,
   }) : super(PizzaGeneratorInitial()) {
     on<LoadIngredientsEvent>(_onCustomPizzaGeneratorEvent);
+    on<IngredientsSelectionChanged>(_onIngredientSelectionChanged);
   }
   final LoadIngredientsUsecase loadIngredientsUsecase;
+  final SaveIngredientsUsecase saveIngredientsUsecase;
 
   FutureOr<void> _onCustomPizzaGeneratorEvent(
     LoadIngredientsEvent event,
@@ -27,6 +30,31 @@ class PizzaGeneratorBloc
       (r) => emit(
         state.copyWith(ingredients: r),
       ),
+    );
+  }
+
+  FutureOr<void> _onIngredientSelectionChanged(
+    IngredientsSelectionChanged event,
+    Emitter<PizzaGeneratorState> emit,
+  ) async {
+    final oldIngredients = state.ingredients;
+    final name = event.name;
+    final isSelected = event.isSelected;
+
+    final newIngredients = oldIngredients.map(
+      (e) {
+        if (e.name == name) {
+          return e.copyWith(isSelected: isSelected);
+        }
+        return e;
+      },
+    ).toList();
+
+    final failureOrUnit = await saveIngredientsUsecase(newIngredients).run();
+
+    failureOrUnit.fold(
+      (l) => (),
+      (r) => emit(state.copyWith(ingredients: newIngredients)),
     );
   }
 }
