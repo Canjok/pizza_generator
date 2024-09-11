@@ -8,6 +8,15 @@ final sl = GetIt.I;
 
 Future<void> initServiceLocator() async {
   // Repositories
+  final preferences = await SharedPreferencesWithCache.create(
+    cacheOptions: SharedPreferencesWithCacheOptions(
+      allowList: PreferenceKeys.values
+          .map(
+            (e) => e.name,
+          )
+          .toSet(),
+    ),
+  );
   sl
     ..registerLazySingleton<IngredientsRepository>(
       IngredientsRepositoryImpl.new,
