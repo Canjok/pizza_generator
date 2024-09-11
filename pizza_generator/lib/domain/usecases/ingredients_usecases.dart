@@ -10,6 +10,15 @@ sealed class IngredientsUsecase {
   final IngredientsRepository ingredientsRepository;
 }
 
+class AddIngredientUsecase extends IngredientsUsecase {
+  AddIngredientUsecase({required super.ingredientsRepository});
+
+  TaskEither<Failure, List<Ingredient>> call({required String name}) {
+    final ingredient = Ingredient(name: name, isSelected: true);
+    return ingredientsRepository.addIngredient(ingredient);
+  }
+}
+
 class LoadIngredientsUsecase extends IngredientsUsecase {
   LoadIngredientsUsecase({
     required this.commonPreferencesRepository,
