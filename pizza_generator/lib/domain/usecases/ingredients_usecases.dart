@@ -16,3 +16,11 @@ class LoadIngredientsUsecase extends IngredientsUsecase {
     return ingredientsRepository.getExampleIngredients();
   }
 }
+
+class SaveIngredientsUsecase extends IngredientsUsecase {
+  SaveIngredientsUsecase({required super.ingredientsRepository});
+
+  TaskEither<Failure, Unit> call(List<Ingredient> ingredients) {
+    return ingredientsRepository.saveIngredients(ingredients);
+  }
+}
