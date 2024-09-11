@@ -27,7 +27,7 @@ class CommonPreferencesRepositoryImpl implements CommonPreferencesRepository {
               .setFirstTimeAppLaunch(isFirstTime: false)
               .andThen(() => TaskEither.right(false));
         }
-        return TaskEither.right(true);
+        return TaskEither.right(false);
       },
     );
   }
