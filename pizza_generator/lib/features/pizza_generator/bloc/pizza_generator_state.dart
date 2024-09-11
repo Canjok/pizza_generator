@@ -6,21 +6,25 @@ part of 'pizza_generator_bloc.dart';
 class PizzaGeneratorState extends Equatable {
   /// {@macro pizza_generator_state}
   const PizzaGeneratorState({
+    required this.ingredients,
     this.customProperty = 'Default Value',
   });
 
   /// A description for customProperty
   final String customProperty;
+  final List<Ingredient> ingredients;
 
   @override
-  List<Object> get props => [customProperty];
+  List<Object> get props => [customProperty, ingredients];
 
   /// Creates a copy of the current PizzaGeneratorState with property changes
   PizzaGeneratorState copyWith({
     String? customProperty,
+    List<Ingredient>? ingredients,
   }) {
     return PizzaGeneratorState(
       customProperty: customProperty ?? this.customProperty,
+      ingredients: ingredients ?? this.ingredients,
     );
   }
 }
@@ -30,5 +34,5 @@ class PizzaGeneratorState extends Equatable {
 /// {@endtemplate}
 class PizzaGeneratorInitial extends PizzaGeneratorState {
   /// {@macro pizza_generator_initial}
-  const PizzaGeneratorInitial() : super();
+  PizzaGeneratorInitial() : super(ingredients: []);
 }
