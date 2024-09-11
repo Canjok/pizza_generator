@@ -1,7 +1,10 @@
 import 'package:get_it/get_it.dart';
+import 'package:pizza_generator/data/repository_impls/common_preferences_repository_impl.dart';
 import 'package:pizza_generator/data/repository_impls/ingredients_repository_impl.dart';
+import 'package:pizza_generator/data/sources/common_preferences.dart';
 import 'package:pizza_generator/data/sources/local_ingredients.dart';
 import 'package:pizza_generator/data/sources/preference_keys.dart';
+import 'package:pizza_generator/domain/repositories/common_preferences_repository.dart';
 import 'package:pizza_generator/domain/repositories/ingredients_repository.dart';
 import 'package:pizza_generator/domain/usecases/ingredients_usecases.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,14 +27,22 @@ Future<void> initServiceLocator() async {
     ..registerLazySingleton(
       () => LocalIngredients(preferences: preferences),
     )
+    ..registerLazySingleton(
+      () => CommonPreferences(preferences: preferences),
+    )
     // Repositories
+    ..registerLazySingleton<CommonPreferencesRepository>(
+      () => CommonPreferencesRepositoryImpl(commonPreferences: sl()),
+    )
     ..registerLazySingleton<IngredientsRepository>(
       () => IngredientsRepositoryImpl(localIngredients: sl()),
     )
-
     // Usecases
     ..registerLazySingleton(
-      () => LoadIngredientsUsecase(ingredientsRepository: sl()),
+      () => LoadIngredientsUsecase(
+        commonPreferencesRepository: sl(),
+        ingredientsRepository: sl(),
+      ),
     )
     ..registerLazySingleton(
       () => SaveIngredientsUsecase(ingredientsRepository: sl()),
