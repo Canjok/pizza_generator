@@ -21,6 +21,7 @@ IngredientModel _$IngredientModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$IngredientModel {
   String get name => throw _privateConstructorUsedError;
+  String get uid => throw _privateConstructorUsedError;
   bool get selected => throw _privateConstructorUsedError;
 
   /// Serializes this IngredientModel to a JSON map.
@@ -39,7 +40,7 @@ abstract class $IngredientModelCopyWith<$Res> {
           IngredientModel value, $Res Function(IngredientModel) then) =
       _$IngredientModelCopyWithImpl<$Res, IngredientModel>;
   @useResult
-  $Res call({String name, bool selected});
+  $Res call({String name, String uid, bool selected});
 }
 
 /// @nodoc
@@ -58,12 +59,17 @@ class _$IngredientModelCopyWithImpl<$Res, $Val extends IngredientModel>
   @override
   $Res call({
     Object? name = null,
+    Object? uid = null,
     Object? selected = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
               as String,
       selected: null == selected
           ? _value.selected
@@ -81,7 +87,7 @@ abstract class _$$IngredientModelImplCopyWith<$Res>
       __$$IngredientModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, bool selected});
+  $Res call({String name, String uid, bool selected});
 }
 
 /// @nodoc
@@ -98,12 +104,17 @@ class __$$IngredientModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
+    Object? uid = null,
     Object? selected = null,
   }) {
     return _then(_$IngredientModelImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
               as String,
       selected: null == selected
           ? _value.selected
@@ -116,7 +127,8 @@ class __$$IngredientModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$IngredientModelImpl extends _IngredientModel {
-  const _$IngredientModelImpl({required this.name, required this.selected})
+  const _$IngredientModelImpl(
+      {required this.name, required this.uid, required this.selected})
       : super._();
 
   factory _$IngredientModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -125,11 +137,13 @@ class _$IngredientModelImpl extends _IngredientModel {
   @override
   final String name;
   @override
+  final String uid;
+  @override
   final bool selected;
 
   @override
   String toString() {
-    return 'IngredientModel(name: $name, selected: $selected)';
+    return 'IngredientModel(name: $name, uid: $uid, selected: $selected)';
   }
 
   @override
@@ -138,13 +152,14 @@ class _$IngredientModelImpl extends _IngredientModel {
         (other.runtimeType == runtimeType &&
             other is _$IngredientModelImpl &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.selected, selected) ||
                 other.selected == selected));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, name, selected);
+  int get hashCode => Object.hash(runtimeType, name, uid, selected);
 
   /// Create a copy of IngredientModel
   /// with the given fields replaced by the non-null parameter values.
@@ -166,6 +181,7 @@ class _$IngredientModelImpl extends _IngredientModel {
 abstract class _IngredientModel extends IngredientModel {
   const factory _IngredientModel(
       {required final String name,
+      required final String uid,
       required final bool selected}) = _$IngredientModelImpl;
   const _IngredientModel._() : super._();
 
@@ -174,6 +190,8 @@ abstract class _IngredientModel extends IngredientModel {
 
   @override
   String get name;
+  @override
+  String get uid;
   @override
   bool get selected;
 

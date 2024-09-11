@@ -8,6 +8,7 @@ part 'ingredient_model.g.dart';
 class IngredientModel with _$IngredientModel {
   const factory IngredientModel({
     required String name,
+    required String uid,
     required bool selected,
   }) = _IngredientModel;
 
@@ -16,8 +17,15 @@ class IngredientModel with _$IngredientModel {
   factory IngredientModel.fromJson(Map<String, Object?> json) =>
       _$IngredientModelFromJson(json);
 
-  factory IngredientModel.fromDomain(Ingredient ingredient) =>
-      IngredientModel(name: ingredient.name, selected: ingredient.isSelected);
+  factory IngredientModel.fromDomain(Ingredient ingredient) => IngredientModel(
+        name: ingredient.name,
+        selected: ingredient.isSelected,
+        uid: ingredient.uid,
+      );
 
-  Ingredient toDomain() => Ingredient(name: name, isSelected: selected);
+  Ingredient toDomain() => Ingredient(
+        name: name,
+        isSelected: selected,
+        uid: uid,
+      );
 }

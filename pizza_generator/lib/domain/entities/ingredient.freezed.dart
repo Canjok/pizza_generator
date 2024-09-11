@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$Ingredient {
   String get name => throw _privateConstructorUsedError;
+  String get uid => throw _privateConstructorUsedError;
   bool get isSelected => throw _privateConstructorUsedError;
 
   /// Create a copy of Ingredient
@@ -32,7 +33,7 @@ abstract class $IngredientCopyWith<$Res> {
           Ingredient value, $Res Function(Ingredient) then) =
       _$IngredientCopyWithImpl<$Res, Ingredient>;
   @useResult
-  $Res call({String name, bool isSelected});
+  $Res call({String name, String uid, bool isSelected});
 }
 
 /// @nodoc
@@ -51,12 +52,17 @@ class _$IngredientCopyWithImpl<$Res, $Val extends Ingredient>
   @override
   $Res call({
     Object? name = null,
+    Object? uid = null,
     Object? isSelected = null,
   }) {
     return _then(_value.copyWith(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
               as String,
       isSelected: null == isSelected
           ? _value.isSelected
@@ -74,7 +80,7 @@ abstract class _$$IngredientImplCopyWith<$Res>
       __$$IngredientImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, bool isSelected});
+  $Res call({String name, String uid, bool isSelected});
 }
 
 /// @nodoc
@@ -91,12 +97,17 @@ class __$$IngredientImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = null,
+    Object? uid = null,
     Object? isSelected = null,
   }) {
     return _then(_$IngredientImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      uid: null == uid
+          ? _value.uid
+          : uid // ignore: cast_nullable_to_non_nullable
               as String,
       isSelected: null == isSelected
           ? _value.isSelected
@@ -109,16 +120,19 @@ class __$$IngredientImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$IngredientImpl implements _Ingredient {
-  const _$IngredientImpl({required this.name, required this.isSelected});
+  const _$IngredientImpl(
+      {required this.name, required this.uid, required this.isSelected});
 
   @override
   final String name;
+  @override
+  final String uid;
   @override
   final bool isSelected;
 
   @override
   String toString() {
-    return 'Ingredient(name: $name, isSelected: $isSelected)';
+    return 'Ingredient(name: $name, uid: $uid, isSelected: $isSelected)';
   }
 
   @override
@@ -127,12 +141,13 @@ class _$IngredientImpl implements _Ingredient {
         (other.runtimeType == runtimeType &&
             other is _$IngredientImpl &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.isSelected, isSelected) ||
                 other.isSelected == isSelected));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, name, isSelected);
+  int get hashCode => Object.hash(runtimeType, name, uid, isSelected);
 
   /// Create a copy of Ingredient
   /// with the given fields replaced by the non-null parameter values.
@@ -146,10 +161,13 @@ class _$IngredientImpl implements _Ingredient {
 abstract class _Ingredient implements Ingredient {
   const factory _Ingredient(
       {required final String name,
+      required final String uid,
       required final bool isSelected}) = _$IngredientImpl;
 
   @override
   String get name;
+  @override
+  String get uid;
   @override
   bool get isSelected;
 
