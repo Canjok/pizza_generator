@@ -30,7 +30,10 @@ class LoadIngredientsUsecase extends IngredientsUsecase {
   TaskEither<Failure, List<Ingredient>> call() {
     return commonPreferencesRepository.getIsFirstAppLaunch().flatMap(
       (isFirstLaunch) {
-        return ingredientsRepository.getExampleIngredients();
+        if (isFirstLaunch) {
+          return ingredientsRepository.getExampleIngredients();
+        }
+        return ingredientsRepository.loadLocalIngredients();
       },
     );
   }

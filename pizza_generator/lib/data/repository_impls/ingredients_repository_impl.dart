@@ -33,4 +33,11 @@ class IngredientsRepositoryImpl extends IngredientsRepository {
           (r) => r.toDomain(),
         );
   }
+
+  @override
+  TaskEither<Failure, List<Ingredient>> loadLocalIngredients() {
+    return localIngredients.loadIngredients().map(
+          (r) => r.toDomain(),
+        );
+  }
 }
