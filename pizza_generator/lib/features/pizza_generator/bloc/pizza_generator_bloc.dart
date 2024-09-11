@@ -11,12 +11,15 @@ part 'pizza_generator_state.dart';
 class PizzaGeneratorBloc
     extends Bloc<PizzaGeneratorEvent, PizzaGeneratorState> {
   PizzaGeneratorBloc({
+    required this.addIngredientUsecase,
     required this.loadIngredientsUsecase,
     required this.saveIngredientsUsecase,
   }) : super(PizzaGeneratorInitial()) {
     on<LoadIngredientsEvent>(_onCustomPizzaGeneratorEvent);
     on<IngredientsSelectionChanged>(_onIngredientSelectionChanged);
+    on<AddIngredientEvent>(_onAddIngredientEvent);
   }
+  final AddIngredientUsecase addIngredientUsecase;
   final LoadIngredientsUsecase loadIngredientsUsecase;
   final SaveIngredientsUsecase saveIngredientsUsecase;
 
@@ -55,6 +58,18 @@ class PizzaGeneratorBloc
     failureOrUnit.fold(
       (l) => (),
       (r) => emit(state.copyWith(ingredients: newIngredients)),
+    );
+  }
+
+  FutureOr<void> _onAddIngredientEvent(
+    AddIngredientEvent event,
+    Emitter<PizzaGeneratorState> emit,
+  ) async {
+    final name = event.name;
+    final failureOrIngredients = await addIngredientUsecase(name: name).run();
+    failureOrIngredients.fold(
+      (l) => (),
+      (r) => emit(state.copyWith(ingredients: r)),
     );
   }
 }
