@@ -24,3 +24,9 @@ class IngredientsSelectionChanged extends PizzaGeneratorEvent {
   final String name;
   final bool isSelected;
 }
+
+class AddIngredientEvent extends PizzaGeneratorEvent {
+  const AddIngredientEvent({required this.name});
+
+  final String name;
+}
