@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pizza_generator/features/common/widget_constants.dart';
 import 'package:pizza_generator/features/pizza_generator/bloc/bloc.dart';
 import 'package:pizza_generator/features/pizza_generator/widgets/pizza_generator_body.dart';
 import 'package:pizza_generator/features/settings/view/settings_page.dart';
+import 'package:pizza_generator/injection_container.dart';
 import 'package:pizza_generator/l10n/l10n.dart';
 
 /// {@template pizza_generator_page}
@@ -21,7 +23,8 @@ class PizzaGeneratorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => PizzaGeneratorBloc(),
+      create: (context) => PizzaGeneratorBloc(loadIngredientsUsecase: sl())
+        ..add(const LoadIngredientsEvent()),
       child: Scaffold(
         appBar: AppBar(
           title: Text(context.l10n.appTitle),
@@ -38,7 +41,10 @@ class PizzaGeneratorPage extends StatelessWidget {
             ),
           ],
         ),
-        body: const PizzaGeneratorView(),
+        body: Padding(
+          padding: EdgeInsets.all(WidgetConstants.pagePadding),
+          child: const PizzaGeneratorView(),
+        ),
       ),
     );
   }
