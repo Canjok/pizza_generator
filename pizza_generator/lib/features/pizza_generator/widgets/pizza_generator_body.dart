@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pizza_generator/features/common/widget_constants.dart';
 import 'package:pizza_generator/features/pizza_generator/bloc/bloc.dart';
+import 'package:pizza_generator/features/pizza_generator/widgets/add_ingredient_item.dart';
 import 'package:pizza_generator/features/pizza_generator/widgets/selectable_ingredient_widget.dart';
 
 /// {@template pizza_generator_body}
@@ -15,16 +17,23 @@ class PizzaGeneratorBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<PizzaGeneratorBloc, PizzaGeneratorState>(
       builder: (context, state) {
-        return ListView.separated(
-          itemBuilder: (context, index) => ingredientBuilder(
-            context,
-            index,
-            state,
-          ),
-          separatorBuilder: (context, index) => const Divider(
-            height: 8,
-          ),
-          itemCount: state.ingredients.length,
+        return Column(
+          children: [
+            ListView.separated(
+              shrinkWrap: true,
+              itemBuilder: (context, index) => ingredientBuilder(
+                context,
+                index,
+                state,
+              ),
+              separatorBuilder: (context, index) => const Divider(
+                height: 8,
+              ),
+              itemCount: state.ingredients.length,
+            ),
+            SizedBox(height: WidgetConstants.mediumGap),
+            const AddIngredientItem(),
+          ],
         );
       },
     );
