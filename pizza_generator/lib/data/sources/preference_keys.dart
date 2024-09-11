@@ -1,1 +1,4 @@
-enum PreferenceKeys { ingredients }
+enum PreferenceKeys {
+  firstTimeAppLaunch,
+  ingredients,
+}

@@ -1,6 +1,7 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:pizza_generator/core/failure.dart';
 import 'package:pizza_generator/domain/entities/ingredient.dart';
+import 'package:pizza_generator/domain/repositories/common_preferences_repository.dart';
 import 'package:pizza_generator/domain/repositories/ingredients_repository.dart';
 
 sealed class IngredientsUsecase {
@@ -10,10 +11,19 @@ sealed class IngredientsUsecase {
 }
 
 class LoadIngredientsUsecase extends IngredientsUsecase {
-  LoadIngredientsUsecase({required super.ingredientsRepository});
+  LoadIngredientsUsecase({
+    required this.commonPreferencesRepository,
+    required super.ingredientsRepository,
+  });
+
+  final CommonPreferencesRepository commonPreferencesRepository;
 
   TaskEither<Failure, List<Ingredient>> call() {
-    return ingredientsRepository.getExampleIngredients();
+    return commonPreferencesRepository.getIsFirstAppLaunch().flatMap(
+      (isFirstLaunch) {
+        return ingredientsRepository.getExampleIngredients();
+      },
+    );
   }
 }
 
