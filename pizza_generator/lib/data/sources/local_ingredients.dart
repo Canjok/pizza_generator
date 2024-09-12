@@ -69,4 +69,28 @@ final class LocalIngredients {
       (error, stackTrace) => UnknownFailure(),
     );
   }
+
+  TaskEither<Failure, IngredientListModel> deleteIngredient(
+    IngredientModel ingredient,
+  ) {
+    return TaskEither.tryCatch(
+      () async {
+        final stringList = preferences.getStringList(_key) ?? []
+          ..remove(json.encode(ingredient.toJson()));
+
+        await preferences.setStringList(_key, stringList);
+
+        final jsonIngredients =
+            stringList.map((e) => json.decode(e) as Map<String, dynamic>);
+        final ingredients = jsonIngredients
+            .map(
+              IngredientModel.fromJson,
+            )
+            .toList();
+
+        return IngredientListModel(ingredients: ingredients);
+      },
+      (error, stackTrace) => UnknownFailure(),
+    );
+  }
 }
