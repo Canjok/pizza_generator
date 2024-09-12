@@ -26,9 +26,7 @@ class PizzaGeneratorBody extends StatelessWidget {
                 index,
                 state,
               ),
-              separatorBuilder: (context, index) => const Divider(
-                height: 8,
-              ),
+              separatorBuilder: (context, index) => const Divider(),
               itemCount: state.ingredients.length,
             ),
             SizedBox(height: WidgetConstants.mediumGap),
