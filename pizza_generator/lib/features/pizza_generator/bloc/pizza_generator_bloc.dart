@@ -12,16 +12,32 @@ class PizzaGeneratorBloc
     extends Bloc<PizzaGeneratorEvent, PizzaGeneratorState> {
   PizzaGeneratorBloc({
     required this.addIngredientUsecase,
+    required this.deleteIngredientUsecase,
     required this.loadIngredientsUsecase,
     required this.saveIngredientsUsecase,
   }) : super(PizzaGeneratorInitial()) {
+    on<DeleteIngredientEvent>(_onDeleteIngredientEvent);
     on<LoadIngredientsEvent>(_onCustomPizzaGeneratorEvent);
     on<IngredientsSelectionChanged>(_onIngredientSelectionChanged);
     on<AddIngredientEvent>(_onAddIngredientEvent);
   }
   final AddIngredientUsecase addIngredientUsecase;
+  final DeleteIngredientUsecase deleteIngredientUsecase;
   final LoadIngredientsUsecase loadIngredientsUsecase;
   final SaveIngredientsUsecase saveIngredientsUsecase;
+
+  FutureOr<void> _onDeleteIngredientEvent(
+    DeleteIngredientEvent event,
+    Emitter<PizzaGeneratorState> emit,
+  ) async {
+    final ingredient = event.ingredient;
+    final failureOrIngredients =
+        await deleteIngredientUsecase(ingredient: ingredient).run();
+    failureOrIngredients.fold(
+      (l) => (),
+      (ingredients) => emit(state.copyWith(ingredients: ingredients)),
+    );
+  }
 
   FutureOr<void> _onCustomPizzaGeneratorEvent(
     LoadIngredientsEvent event,
