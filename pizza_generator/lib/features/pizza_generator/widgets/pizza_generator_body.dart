@@ -9,10 +9,15 @@ import 'package:pizza_generator/features/pizza_generator/widgets/selectable_ingr
 ///
 /// Add what it does
 /// {@endtemplate}
-class PizzaGeneratorBody extends StatelessWidget {
+class PizzaGeneratorBody extends StatefulWidget {
   /// {@macro pizza_generator_body}
   const PizzaGeneratorBody({super.key});
 
+  @override
+  State<PizzaGeneratorBody> createState() => _PizzaGeneratorBodyState();
+}
+
+class _PizzaGeneratorBodyState extends State<PizzaGeneratorBody> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PizzaGeneratorBloc, PizzaGeneratorState>(
