@@ -43,9 +43,23 @@ class PizzaGeneratorBody extends StatelessWidget {
     PizzaGeneratorState state,
   ) {
     final ingredient = state.ingredients[index];
-    return SelectableIngredientWidget(
-      isSelected: ingredient.isSelected,
-      name: ingredient.name,
+    return Dismissible(
+      background: ColoredBox(
+        color: Colors.red.shade400,
+        child: const Icon(Icons.delete),
+      ),
+      direction: DismissDirection.startToEnd,
+      key: UniqueKey(),
+      onDismissed: (DismissDirection direction) {
+        setState(() {
+          BlocProvider.of<PizzaGeneratorBloc>(context)
+              .add(DeleteIngredientEvent(ingredient: ingredient));
+        });
+      },
+      child: SelectableIngredientWidget(
+        isSelected: ingredient.isSelected,
+        name: ingredient.name,
+      ),
     );
   }
 }
