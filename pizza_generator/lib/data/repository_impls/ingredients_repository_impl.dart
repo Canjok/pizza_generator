@@ -40,4 +40,15 @@ class IngredientsRepositoryImpl extends IngredientsRepository {
           (r) => r.toDomain(),
         );
   }
+
+  @override
+  TaskEither<Failure, List<Ingredient>> deleteIngredient(
+    Ingredient ingredient,
+  ) {
+    return localIngredients
+        .deleteIngredient(IngredientModel.fromDomain(ingredient))
+        .map(
+          (r) => r.toDomain(),
+        );
+  }
 }

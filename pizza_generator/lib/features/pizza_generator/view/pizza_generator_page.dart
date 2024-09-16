@@ -25,6 +25,7 @@ class PizzaGeneratorPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => PizzaGeneratorBloc(
         addIngredientUsecase: sl(),
+        deleteIngredientUsecase: sl(),
         loadIngredientsUsecase: sl(),
         saveIngredientsUsecase: sl(),
       )..add(const LoadIngredientsEvent()),

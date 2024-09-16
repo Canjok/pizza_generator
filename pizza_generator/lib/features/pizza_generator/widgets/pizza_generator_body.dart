@@ -9,10 +9,15 @@ import 'package:pizza_generator/features/pizza_generator/widgets/selectable_ingr
 ///
 /// Add what it does
 /// {@endtemplate}
-class PizzaGeneratorBody extends StatelessWidget {
+class PizzaGeneratorBody extends StatefulWidget {
   /// {@macro pizza_generator_body}
   const PizzaGeneratorBody({super.key});
 
+  @override
+  State<PizzaGeneratorBody> createState() => _PizzaGeneratorBodyState();
+}
+
+class _PizzaGeneratorBodyState extends State<PizzaGeneratorBody> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PizzaGeneratorBloc, PizzaGeneratorState>(
@@ -26,9 +31,7 @@ class PizzaGeneratorBody extends StatelessWidget {
                 index,
                 state,
               ),
-              separatorBuilder: (context, index) => const Divider(
-                height: 8,
-              ),
+              separatorBuilder: (context, index) => const Divider(),
               itemCount: state.ingredients.length,
             ),
             SizedBox(height: WidgetConstants.mediumGap),
@@ -45,9 +48,23 @@ class PizzaGeneratorBody extends StatelessWidget {
     PizzaGeneratorState state,
   ) {
     final ingredient = state.ingredients[index];
-    return SelectableIngredientWidget(
-      isSelected: ingredient.isSelected,
-      name: ingredient.name,
+    return Dismissible(
+      background: ColoredBox(
+        color: Colors.red.shade400,
+        child: const Icon(Icons.delete),
+      ),
+      direction: DismissDirection.startToEnd,
+      key: UniqueKey(),
+      onDismissed: (DismissDirection direction) {
+        setState(() {
+          BlocProvider.of<PizzaGeneratorBloc>(context)
+              .add(DeleteIngredientEvent(ingredient: ingredient));
+        });
+      },
+      child: SelectableIngredientWidget(
+        isSelected: ingredient.isSelected,
+        name: ingredient.name,
+      ),
     );
   }
 }

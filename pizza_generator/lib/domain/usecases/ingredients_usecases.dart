@@ -21,6 +21,14 @@ class AddIngredientUsecase extends IngredientsUsecase {
   }
 }
 
+class DeleteIngredientUsecase extends IngredientsUsecase {
+  DeleteIngredientUsecase({required super.ingredientsRepository});
+
+  TaskEither<Failure, List<Ingredient>> call({required Ingredient ingredient}) {
+    return ingredientsRepository.deleteIngredient(ingredient);
+  }
+}
+
 class LoadIngredientsUsecase extends IngredientsUsecase {
   LoadIngredientsUsecase({
     required this.commonPreferencesRepository,

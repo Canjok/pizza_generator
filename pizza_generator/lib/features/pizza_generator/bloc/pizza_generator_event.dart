@@ -30,3 +30,9 @@ class AddIngredientEvent extends PizzaGeneratorEvent {
 
   final String name;
 }
+
+class DeleteIngredientEvent extends PizzaGeneratorEvent {
+  const DeleteIngredientEvent({required this.ingredient});
+
+  final Ingredient ingredient;
+}
