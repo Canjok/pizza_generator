@@ -12,14 +12,13 @@ class IngredientListView extends StatelessWidget {
         return true;
       },
       builder: (context, state) {
-        return ListView.separated(
+        return ListView.builder(
           shrinkWrap: true,
           itemBuilder: (context, index) => _ingredientBuilder(
             context,
             index,
             state,
           ),
-          separatorBuilder: (context, index) => const Divider(),
           itemCount: state.ingredients.length,
         );
       },
