@@ -1,6 +1,7 @@
 {
     "@@locale": "de",
     "appTitle": "Pizza Generator",
+    "create": "Erstellen",
     "newIngredient": "Neue Zutat",
     "settings": "Einstellungen"
 }

@@ -36,3 +36,7 @@ class DeleteIngredientEvent extends PizzaGeneratorEvent {
 
   final Ingredient ingredient;
 }
+
+class GenerateIngredientsEvent extends PizzaGeneratorEvent {
+  const GenerateIngredientsEvent();
+}

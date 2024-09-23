@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pizza_generator/features/common/widget_constants.dart';
 import 'package:pizza_generator/features/pizza_generator/bloc/bloc.dart';
 import 'package:pizza_generator/features/pizza_generator/widgets/add_ingredient_item.dart';
+import 'package:pizza_generator/features/pizza_generator/widgets/generated_ingredients_view.dart';
+import 'package:pizza_generator/features/pizza_generator/widgets/ingredient_generator_button.dart';
 import 'package:pizza_generator/features/pizza_generator/widgets/ingredient_list_view.dart';
 
 /// {@template pizza_generator_body}
@@ -27,6 +29,9 @@ class _PizzaGeneratorBodyState extends State<PizzaGeneratorBody> {
             const IngredientListView(),
             SizedBox(height: WidgetConstants.mediumGap),
             const AddIngredientItem(),
+            SizedBox(height: WidgetConstants.mediumGap),
+            const IngredientGeneratorButton(),
+            const GeneratedIngredientsView(),
           ],
         );
       },
