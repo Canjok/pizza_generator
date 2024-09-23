@@ -2,6 +2,7 @@
     "@@locale": "de",
     "appTitle": "Pizza Generator",
     "create": "Erstellen",
+    "numberOfGeneratedIngredients": "Anzahl der Zutaten",
     "newIngredient": "Neue Zutat",
     "settings": "Einstellungen"
 }

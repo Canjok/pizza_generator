@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pizza_generator/features/common/widget_constants.dart';
 import 'package:pizza_generator/features/settings/bloc/bloc.dart';
 import 'package:pizza_generator/features/settings/widgets/settings_body.dart';
 import 'package:pizza_generator/l10n/l10n.dart';
@@ -26,7 +27,10 @@ class SettingsPage extends StatelessWidget {
           ),
           title: Text(context.l10n.settings),
         ),
-        body: const SettingsView(),
+        body: Padding(
+          padding: EdgeInsets.all(WidgetConstants.pagePadding),
+          child: const SettingsView(),
+        ),
       ),
     );
   }
