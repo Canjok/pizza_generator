@@ -6,6 +6,7 @@ import 'package:pizza_generator/data/sources/local_ingredients.dart';
 import 'package:pizza_generator/data/sources/preference_keys.dart';
 import 'package:pizza_generator/domain/repositories/common_preferences_repository.dart';
 import 'package:pizza_generator/domain/repositories/ingredients_repository.dart';
+import 'package:pizza_generator/domain/usecases/generation_usecases.dart';
 import 'package:pizza_generator/domain/usecases/ingredients_usecases.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -56,5 +57,6 @@ Future<void> initServiceLocator() async {
     )
     ..registerLazySingleton(
       () => SaveIngredientsUsecase(ingredientsRepository: sl()),
-    );
+    )
+    ..registerLazySingleton(() => GenerateIngredientsUsecase());
 }
