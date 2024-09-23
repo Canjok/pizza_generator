@@ -4,6 +4,10 @@
     "@appTitle": {
         "description": "Title of the whole app"
     },
+    "create": "Create",
+    "@create": {
+        "description": "Title for a button to create random pizza ingredients"
+    },
     "newIngredient": "New ingredient",
     "@newIngredient": {
         "description": "Title of a textform to hint that a new ingredient can be added"
