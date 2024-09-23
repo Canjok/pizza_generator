@@ -41,7 +41,9 @@ class LoadIngredientsUsecase extends IngredientsUsecase {
     return commonPreferencesRepository.getIsFirstAppLaunch().flatMap(
       (isFirstLaunch) {
         if (isFirstLaunch) {
-          return ingredientsRepository.getExampleIngredients();
+          return ingredientsRepository.getExampleIngredients().chainFirst(
+                ingredientsRepository.saveIngredients,
+              );
         }
         return ingredientsRepository.loadLocalIngredients();
       },
