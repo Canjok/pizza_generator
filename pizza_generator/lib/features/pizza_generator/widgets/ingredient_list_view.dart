@@ -3,17 +3,14 @@ import 'package:pizza_generator/features/pizza_generator/bloc/pizza_generator_bl
 import 'package:pizza_generator/features/pizza_generator/widgets/selectable_ingredient_widget.dart';
 import 'package:pizza_generator/features/settings/bloc/bloc.dart';
 
-class IngredientListView extends StatefulWidget {
+class IngredientListView extends StatelessWidget {
   const IngredientListView({super.key});
-
-  @override
-  State<IngredientListView> createState() => _IngredientListViewState();
-}
-
-class _IngredientListViewState extends State<IngredientListView> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PizzaGeneratorBloc, PizzaGeneratorState>(
+      buildWhen: (previous, current) {
+        return true;
+      },
       builder: (context, state) {
         return ListView.separated(
           shrinkWrap: true,
@@ -43,10 +40,8 @@ class _IngredientListViewState extends State<IngredientListView> {
       direction: DismissDirection.startToEnd,
       key: UniqueKey(),
       onDismissed: (DismissDirection direction) {
-        setState(() {
-          BlocProvider.of<PizzaGeneratorBloc>(context)
-              .add(DeleteIngredientEvent(ingredient: ingredient));
-        });
+        BlocProvider.of<PizzaGeneratorBloc>(context)
+            .add(DeleteIngredientEvent(ingredient: ingredient));
       },
       child: SelectableIngredientWidget(
         isSelected: ingredient.isSelected,
