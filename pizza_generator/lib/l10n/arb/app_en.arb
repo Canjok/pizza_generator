@@ -8,6 +8,10 @@
     "@create": {
         "description": "Title for a button to create random pizza ingredients"
     },
+    "numberOfGeneratedIngredients": "Number of ingredients",
+    "@numberOfGeneratedIngredients": {
+        "description": "Title for setting for number of ingredients to generate"
+    },
     "newIngredient": "New ingredient",
     "@newIngredient": {
         "description": "Title of a textform to hint that a new ingredient can be added"
