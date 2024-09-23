@@ -20,12 +20,10 @@ class CommonPreferencesRepositoryImpl implements CommonPreferencesRepository {
   @override
   TaskEither<Failure, bool> getIsFirstAppLaunch() {
     // saves a false boolean after first read
-    return commonPreferences.getFirstTimeAppLaunch().flatMap(
+    return commonPreferences.getFirstTimeAppLaunch().chainFirst(
       (isFirstTime) {
         if (isFirstTime) {
-          return commonPreferences
-              .setFirstTimeAppLaunch(isFirstTime: false)
-              .andThen(() => TaskEither.right(false));
+          return commonPreferences.setFirstTimeAppLaunch(isFirstTime: false);
         }
         return TaskEither.right(false);
       },
