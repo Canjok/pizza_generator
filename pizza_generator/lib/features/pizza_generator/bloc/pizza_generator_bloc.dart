@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:pizza_generator/domain/entities/ingredient.dart';
+import 'package:pizza_generator/domain/usecases/generation_usecases.dart';
 import 'package:pizza_generator/domain/usecases/ingredients_usecases.dart';
 
 part 'pizza_generator_event.dart';
@@ -13,16 +14,19 @@ class PizzaGeneratorBloc
   PizzaGeneratorBloc({
     required this.addIngredientUsecase,
     required this.deleteIngredientUsecase,
+    required this.generateIngredientsUsecase,
     required this.loadIngredientsUsecase,
     required this.saveIngredientsUsecase,
   }) : super(PizzaGeneratorInitial()) {
     on<DeleteIngredientEvent>(_onDeleteIngredientEvent);
     on<LoadIngredientsEvent>(_onCustomPizzaGeneratorEvent);
+    on<GenerateIngredientsEvent>(_onGenerateIngredientsEvent);
     on<IngredientsSelectionChanged>(_onIngredientSelectionChanged);
     on<AddIngredientEvent>(_onAddIngredientEvent);
   }
   final AddIngredientUsecase addIngredientUsecase;
   final DeleteIngredientUsecase deleteIngredientUsecase;
+  final GenerateIngredientsUsecase generateIngredientsUsecase;
   final LoadIngredientsUsecase loadIngredientsUsecase;
   final SaveIngredientsUsecase saveIngredientsUsecase;
 
@@ -86,6 +90,18 @@ class PizzaGeneratorBloc
     failureOrIngredients.fold(
       (l) => (),
       (r) => emit(state.copyWith(ingredients: r)),
+    );
+  }
+
+  FutureOr<void> _onGenerateIngredientsEvent(
+    GenerateIngredientsEvent event,
+    Emitter<PizzaGeneratorState> emit,
+  ) async {
+    final failureOrIngredients =
+        await generateIngredientsUsecase(ingredients: state.ingredients).run();
+    failureOrIngredients.fold(
+      (l) => (),
+      (r) => emit(state.copyWith(generatedIngredients: r)),
     );
   }
 }
