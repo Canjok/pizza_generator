@@ -19,7 +19,7 @@ class _IngredientListViewState extends State<IngredientListView> {
           children: [
             ListView.separated(
               shrinkWrap: true,
-              itemBuilder: (context, index) => ingredientBuilder(
+              itemBuilder: (context, index) => _ingredientBuilder(
                 context,
                 index,
                 state,
@@ -33,7 +33,7 @@ class _IngredientListViewState extends State<IngredientListView> {
     );
   }
 
-  Widget ingredientBuilder(
+  Widget _ingredientBuilder(
     BuildContext context,
     int index,
     PizzaGeneratorState state,
