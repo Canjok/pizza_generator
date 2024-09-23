@@ -15,19 +15,15 @@ class _IngredientListViewState extends State<IngredientListView> {
   Widget build(BuildContext context) {
     return BlocBuilder<PizzaGeneratorBloc, PizzaGeneratorState>(
       builder: (context, state) {
-        return Column(
-          children: [
-            ListView.separated(
-              shrinkWrap: true,
-              itemBuilder: (context, index) => _ingredientBuilder(
-                context,
-                index,
-                state,
-              ),
-              separatorBuilder: (context, index) => const Divider(),
-              itemCount: state.ingredients.length,
-            ),
-          ],
+        return ListView.separated(
+          shrinkWrap: true,
+          itemBuilder: (context, index) => _ingredientBuilder(
+            context,
+            index,
+            state,
+          ),
+          separatorBuilder: (context, index) => const Divider(),
+          itemCount: state.ingredients.length,
         );
       },
     );
