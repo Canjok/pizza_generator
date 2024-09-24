@@ -21,8 +21,10 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => SettingsBloc(
-        saveIngredientGenerationCountUsecase: sl(),
+        loadAllowMultipleUsageOfAnIngredientUsecase: sl(),
         loadIngredientGenerationCountUsecase: sl(),
+        saveAllowMultipleUsageOfAnIngredientUsecase: sl(),
+        saveIngredientGenerationCountUsecase: sl(),
       ),
       child: Scaffold(
         appBar: AppBar(

@@ -63,12 +63,22 @@ Future<void> initServiceLocator() async {
       ),
     )
     ..registerLazySingleton(
+      () => LoadAllowMultipleUsageOfAnIngredientUsecase(
+        settingsRepository: sl(),
+      ),
+    )
+    ..registerLazySingleton(
       () => LoadIngredientGenerationCountUsecase(settingsRepository: sl()),
     )
     ..registerLazySingleton(
       () => LoadIngredientsUsecase(
         commonPreferencesRepository: sl(),
         ingredientsRepository: sl(),
+      ),
+    )
+    ..registerLazySingleton(
+      () => SaveAllowMultipleUsageOfAnIngredientUsecase(
+        settingsRepository: sl(),
       ),
     )
     ..registerLazySingleton(

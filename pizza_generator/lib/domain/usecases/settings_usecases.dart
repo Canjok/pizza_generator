@@ -23,3 +23,25 @@ class SaveIngredientGenerationCountUsecase extends SettingsUsecases {
     return settingsRepository.saveIngredientGenerationCount(count);
   }
 }
+
+class LoadAllowMultipleUsageOfAnIngredientUsecase extends SettingsUsecases {
+  LoadAllowMultipleUsageOfAnIngredientUsecase({
+    required super.settingsRepository,
+  });
+
+  TaskEither<Failure, bool> call() {
+    return settingsRepository.loadAllowMultipleUsageOfAnIngredient();
+  }
+}
+
+class SaveAllowMultipleUsageOfAnIngredientUsecase extends SettingsUsecases {
+  SaveAllowMultipleUsageOfAnIngredientUsecase({
+    required super.settingsRepository,
+  });
+
+  TaskEither<Failure, Unit> call({required bool allow}) {
+    return settingsRepository.saveAllowMultipleUsageOfAnIngredient(
+      allow: allow,
+    );
+  }
+}

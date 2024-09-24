@@ -8,15 +8,27 @@ part 'settings_state.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   SettingsBloc({
-    required this.saveIngredientGenerationCountUsecase,
+    required this.loadAllowMultipleUsageOfAnIngredientUsecase,
     required this.loadIngredientGenerationCountUsecase,
+    required this.saveAllowMultipleUsageOfAnIngredientUsecase,
+    required this.saveIngredientGenerationCountUsecase,
   }) : super(const SettingsInitial()) {
     on<IncreaseIngredientCountEvent>(_onIncreaseIngredientCountEvent);
     on<DecreaseIngredientCountEvent>(_onDecreaseIngredientCountEvent);
     on<LoadIngredientCountEvent>(_onLoadIngredientCountEvent);
+    on<SetAllowMultipleUsageOfAnIngredientEvent>(
+      _setAllowMultipleUsageOfAnIngredientEvent,
+    );
+    on<LoadAllowMultipleUsageOfAnIngredientEvent>(
+      _onLoadAllowMultipleUsageOfAnIngredientEvent,
+    );
   }
 
+  LoadAllowMultipleUsageOfAnIngredientUsecase
+      loadAllowMultipleUsageOfAnIngredientUsecase;
   LoadIngredientGenerationCountUsecase loadIngredientGenerationCountUsecase;
+  SaveAllowMultipleUsageOfAnIngredientUsecase
+      saveAllowMultipleUsageOfAnIngredientUsecase;
   SaveIngredientGenerationCountUsecase saveIngredientGenerationCountUsecase;
 
   FutureOr<void> _onIncreaseIngredientCountEvent(
@@ -60,6 +72,35 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       (l) => (),
       (count) => emit(
         state.copyWith(ingredientCountToGenerate: count),
+      ),
+    );
+  }
+
+  FutureOr<void> _setAllowMultipleUsageOfAnIngredientEvent(
+    SetAllowMultipleUsageOfAnIngredientEvent event,
+    Emitter<SettingsState> emit,
+  ) async {
+    final failureOrUnit = await saveAllowMultipleUsageOfAnIngredientUsecase(
+      allow: event.allow,
+    ).run();
+    failureOrUnit.fold(
+      (l) => (),
+      (_) => emit(
+        state.copyWith(allowMultipleUsageOfAnIngredient: event.allow),
+      ),
+    );
+  }
+
+  FutureOr<void> _onLoadAllowMultipleUsageOfAnIngredientEvent(
+    LoadAllowMultipleUsageOfAnIngredientEvent event,
+    Emitter<SettingsState> emit,
+  ) async {
+    final failureOrBool =
+        await loadAllowMultipleUsageOfAnIngredientUsecase().run();
+    failureOrBool.fold(
+      (l) => (),
+      (isAllowed) => emit(
+        state.copyWith(allowMultipleUsageOfAnIngredient: isAllowed),
       ),
     );
   }

@@ -1,5 +1,6 @@
 {
     "@@locale": "de",
+    "allowMultipleUsageOfAnIngredient": "Mehrfachnutzung einer Zutat erlauben",
     "appTitle": "Pizza Generator",
     "create": "Erstellen",
     "numberOfGeneratedIngredients": "Anzahl der Zutaten",
