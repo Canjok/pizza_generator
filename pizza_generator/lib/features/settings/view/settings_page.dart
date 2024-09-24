@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pizza_generator/features/common/widget_constants.dart';
 import 'package:pizza_generator/features/settings/bloc/bloc.dart';
 import 'package:pizza_generator/features/settings/widgets/settings_body.dart';
+import 'package:pizza_generator/injection_container.dart';
 import 'package:pizza_generator/l10n/l10n.dart';
 
 /// {@template settings_page}
@@ -19,7 +20,10 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SettingsBloc(),
+      create: (context) => SettingsBloc(
+        saveIngredientGenerationCountUsecase: sl(),
+        loadIngredientGenerationCountUsecase: sl(),
+      ),
       child: Scaffold(
         appBar: AppBar(
           leading: BackButton(
