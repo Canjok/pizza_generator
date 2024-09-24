@@ -7,12 +7,14 @@ final class LocalSettings {
   LocalSettings({required this.preferences});
   final SharedPreferencesWithCache preferences;
 
-  final _key = PreferenceKeys.ingredientGenerationCount.name;
+  final _generationCountKey = PreferenceKeys.ingredientGenerationCount.name;
+  final _allowMultipleUsageKey =
+      PreferenceKeys.allowMultipleUsageOfAnIngredient.name;
 
   TaskEither<Failure, int> loadIngredientCountToGenerate() {
     return TaskEither.tryCatch(
       () async {
-        final count = preferences.getInt(_key) ?? 1;
+        final count = preferences.getInt(_generationCountKey) ?? 1;
         return count;
       },
       (error, stackTrace) => UnknownFailure(),
@@ -22,7 +24,29 @@ final class LocalSettings {
   TaskEither<Failure, Unit> saveIngredientCountToGenerate(int count) {
     return TaskEither.tryCatch(
       () async {
-        await preferences.setInt(_key, count);
+        await preferences.setInt(_generationCountKey, count);
+        return unit;
+      },
+      (error, stackTrace) => UnknownFailure(),
+    );
+  }
+
+  TaskEither<Failure, bool> loadAllowMultipleUsageOfAnIngredient() {
+    return TaskEither.tryCatch(
+      () async {
+        final allow = preferences.getBool(_allowMultipleUsageKey) ?? true;
+        return allow;
+      },
+      (error, stackTrace) => UnknownFailure(),
+    );
+  }
+
+  TaskEither<Failure, Unit> saveAllowMultipleUsageOfAnIngredient({
+    required bool allowMultiple,
+  }) {
+    return TaskEither.tryCatch(
+      () async {
+        await preferences.setBool(_allowMultipleUsageKey, allowMultiple);
         return unit;
       },
       (error, stackTrace) => UnknownFailure(),
