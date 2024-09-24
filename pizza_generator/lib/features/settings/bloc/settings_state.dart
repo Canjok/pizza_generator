@@ -6,6 +6,7 @@ part of 'settings_bloc.dart';
 class SettingsState {
   /// {@macro settings_state}
   const SettingsState({
+    required this.allowMultipleUsageOfAnIngredient,
     required this.ingredientCountToGenerate,
     this.customProperty = 'Default Value',
   });
@@ -13,13 +14,17 @@ class SettingsState {
   /// A description for customProperty
   final String customProperty;
   final int ingredientCountToGenerate;
+  final bool allowMultipleUsageOfAnIngredient;
 
   /// Creates a copy of the current SettingsState with property changes
   SettingsState copyWith({
+    bool? allowMultipleUsageOfAnIngredient,
     String? customProperty,
     int? ingredientCountToGenerate,
   }) {
     return SettingsState(
+      allowMultipleUsageOfAnIngredient: allowMultipleUsageOfAnIngredient ??
+          this.allowMultipleUsageOfAnIngredient,
       customProperty: customProperty ?? this.customProperty,
       ingredientCountToGenerate:
           ingredientCountToGenerate ?? this.ingredientCountToGenerate,
@@ -32,5 +37,9 @@ class SettingsState {
 /// {@endtemplate}
 class SettingsInitial extends SettingsState {
   /// {@macro settings_initial}
-  const SettingsInitial() : super(ingredientCountToGenerate: 1);
+  const SettingsInitial()
+      : super(
+          ingredientCountToGenerate: 1,
+          allowMultipleUsageOfAnIngredient: true,
+        );
 }
