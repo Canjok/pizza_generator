@@ -84,5 +84,9 @@ Future<void> initServiceLocator() async {
     ..registerLazySingleton(
       () => SaveIngredientsUsecase(ingredientsRepository: sl()),
     )
-    ..registerLazySingleton(() => GenerateIngredientsUsecase());
+    ..registerLazySingleton(
+      () => GenerateIngredientsUsecase(
+        settingsRepository: sl(),
+      ),
+    );
 }
