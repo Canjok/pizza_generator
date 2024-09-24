@@ -17,4 +17,18 @@ class SettingsRepositoryImpl implements SettingsRepository {
   TaskEither<Failure, Unit> saveIngredientGenerationCount(int count) {
     return localSettings.saveIngredientCountToGenerate(count);
   }
+
+  @override
+  TaskEither<Failure, bool> loadAllowMultipleUsageOfAnIngredient() {
+    return localSettings.loadAllowMultipleUsageOfAnIngredient();
+  }
+
+  @override
+  TaskEither<Failure, Unit> saveAllowMultipleUsageOfAnIngredient({
+    required bool allow,
+  }) {
+    return localSettings.saveAllowMultipleUsageOfAnIngredient(
+      allowMultiple: allow,
+    );
+  }
 }

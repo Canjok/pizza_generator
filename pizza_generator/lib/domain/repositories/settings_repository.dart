@@ -7,4 +7,10 @@ abstract class SettingsRepository {
   TaskEither<Failure, int> loadIngredientGenerationCount();
 
   TaskEither<Failure, Unit> saveIngredientGenerationCount(int count);
+
+  TaskEither<Failure, bool> loadAllowMultipleUsageOfAnIngredient();
+
+  TaskEither<Failure, Unit> saveAllowMultipleUsageOfAnIngredient({
+    required bool allow,
+  });
 }
