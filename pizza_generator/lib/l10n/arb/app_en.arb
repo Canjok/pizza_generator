@@ -1,5 +1,9 @@
 {
     "@@locale": "en",
+    "allowMultipleUsageOfAnIngredient": "Allow multiple usage of an ingredient",
+    "@allowMultipleUsageOfAnIngredient": {
+        "description": "Title to describe a toggle to decide, whether the generator allows an ingredient to be used multiple times."
+    },
     "appTitle": "Pizza Generator",
     "@appTitle": {
         "description": "Title of the whole app"
