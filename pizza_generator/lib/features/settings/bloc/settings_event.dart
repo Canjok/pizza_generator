@@ -7,3 +7,5 @@ abstract class SettingsEvent {
 class IncreaseIngredientCountEvent extends SettingsEvent {}
 
 class DecreaseIngredientCountEvent extends SettingsEvent {}
+
+class LoadIngredientCountEvent extends SettingsEvent {}
