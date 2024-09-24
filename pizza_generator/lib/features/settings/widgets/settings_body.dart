@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pizza_generator/features/settings/bloc/bloc.dart';
+import 'package:pizza_generator/features/settings/settings.dart';
 import 'package:pizza_generator/features/settings/widgets/ingredient_generation_count_item.dart';
 
 /// {@template settings_body}
@@ -13,14 +13,11 @@ class SettingsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SettingsBloc, SettingsState>(
-      builder: (context, state) {
-        return const Column(
-          children: [
-            IngredientGenerationCountItem(),
-          ],
-        );
-      },
+    BlocProvider.of<SettingsBloc>(context).add(LoadIngredientCountEvent());
+    return const Column(
+      children: [
+        IngredientGenerationCountItem(),
+      ],
     );
   }
 }
