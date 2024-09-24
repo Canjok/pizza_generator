@@ -8,32 +8,18 @@ sealed class SettingsUsecases {
   final SettingsRepository settingsRepository;
 }
 
-class IncreaseIngredientGenerationCount extends SettingsUsecases {
-  IncreaseIngredientGenerationCount({required super.settingsRepository});
+class LoadIngredientGenerationCountUsecase extends SettingsUsecases {
+  LoadIngredientGenerationCountUsecase({required super.settingsRepository});
 
   TaskEither<Failure, int> call() {
-    return settingsRepository
-        .loadIngredientGenerationCount()
-        .flatMap(
-          (r) => settingsRepository.saveIngredientGenerationCount(r + 1),
-        )
-        .andThen(
-          settingsRepository.loadIngredientGenerationCount,
-        );
+    return settingsRepository.loadIngredientGenerationCount();
   }
 }
 
-class DecreaseIngredientGenerationCount extends SettingsUsecases {
-  DecreaseIngredientGenerationCount({required super.settingsRepository});
+class SaveIngredientGenerationCountUsecase extends SettingsUsecases {
+  SaveIngredientGenerationCountUsecase({required super.settingsRepository});
 
-  TaskEither<Failure, int> call() {
-    return settingsRepository.loadIngredientGenerationCount().flatMap(
-      (r) {
-        final newCount = r == 1 ? 1 : r--;
-        return settingsRepository.saveIngredientGenerationCount(newCount);
-      },
-    ).andThen(
-      settingsRepository.loadIngredientGenerationCount,
-    );
+  TaskEither<Failure, Unit> call({required int count}) {
+    return settingsRepository.saveIngredientGenerationCount(count);
   }
 }
