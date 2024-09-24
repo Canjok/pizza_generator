@@ -7,7 +7,7 @@ final class LocalSettings {
   LocalSettings({required this.preferences});
   final SharedPreferencesWithCache preferences;
 
-  final _key = PreferenceKeys.settings.name;
+  final _key = PreferenceKeys.ingredientGenerationCount.name;
 
   TaskEither<Failure, int> loadIngredientCountToGenerate() {
     return TaskEither.tryCatch(

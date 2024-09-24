@@ -1,5 +1,6 @@
 enum PreferenceKeys {
   firstTimeAppLaunch,
   ingredients,
-  settings,
+  ingredientGenerationCount,
+  allowDoubledIngredientsForGeneration,
 }
