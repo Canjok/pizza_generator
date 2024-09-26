@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pizza_generator/features/common/widget_constants.dart';
-import 'package:pizza_generator/features/settings/settings.dart';
 import 'package:pizza_generator/features/settings/widgets/ingredient_generation_count_item.dart';
 import 'package:pizza_generator/features/settings/widgets/multiple_ingredient_usage_item.dart';
 
@@ -15,9 +14,6 @@ class SettingsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<SettingsBloc>(context).add(LoadIngredientCountEvent());
-    BlocProvider.of<SettingsBloc>(context)
-        .add(LoadAllowMultipleUsageOfAnIngredientEvent());
     return Column(
       children: [
         const IngredientGenerationCountItem(),

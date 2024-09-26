@@ -25,7 +25,9 @@ class SettingsPage extends StatelessWidget {
         loadIngredientGenerationCountUsecase: sl(),
         saveAllowMultipleUsageOfAnIngredientUsecase: sl(),
         saveIngredientGenerationCountUsecase: sl(),
-      ),
+      )
+        ..add(LoadAllowMultipleUsageOfAnIngredientEvent())
+        ..add(LoadIngredientCountEvent()),
       child: Scaffold(
         appBar: AppBar(
           leading: BackButton(
