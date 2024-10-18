@@ -48,7 +48,7 @@ class PizzaGeneratorPage extends StatelessWidget {
         ),
         body: Padding(
           padding: EdgeInsets.all(WidgetConstants.pagePadding),
-          child: const PizzaGeneratorView(),
+          child: const SingleChildScrollView(child: PizzaGeneratorView()),
         ),
       ),
     );
